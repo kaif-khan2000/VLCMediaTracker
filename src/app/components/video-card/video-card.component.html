@@ -1,0 +1,51 @@
+<div class="video-card" (click)="openVideo()" [class.watched]="videoFile.isWatched">
+  <div class="card-thumbnail">
+    <!-- Enhanced video icon -->
+    <div class="icon-fallback">
+      <span class="material-icons file-icon">{{ getFileIcon() }}</span>
+      <div class="file-extension">{{ videoFile.extension.substring(1).toUpperCase() }}</div>
+    </div>
+    
+    <!-- Play overlay -->
+    <div class="play-overlay">
+      <span class="material-icons play-icon">play_circle_filled</span>
+    </div>
+
+    <!-- Watched indicator -->
+    <div class="watched-indicator" *ngIf="videoFile.isWatched">
+      <span class="material-icons">check_circle</span>
+    </div>
+
+    <!-- Progress indicator for videos with progress but not fully watched -->
+    <div class="progress-indicator" *ngIf="videoFile.watchedPercentage && videoFile.watchedPercentage > 0 && videoFile.watchedPercentage < 80">
+      <span class="progress-text">{{ Math.round(videoFile.watchedPercentage) }}%</span>
+    </div>
+
+    <!-- Progress text on fully watched videos -->
+    <div class="watched-progress" *ngIf="videoFile.isWatched && videoFile.watchedPercentage">
+      <span class="progress-text">{{ Math.round(videoFile.watchedPercentage) }}%</span>
+    </div>
+
+    <!-- Progress bar (shown for any video with progress) -->
+    <div class="progress-bar" *ngIf="videoFile.watchedPercentage && videoFile.watchedPercentage > 0">
+      <div class="progress-fill" [style.width.%]="videoFile.watchedPercentage"></div>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <h3 class="file-name" [title]="videoFile.name">{{ videoFile.name }}</h3>
+    <div class="file-meta">
+      <span class="file-size">{{ getFileSize() }}</span>
+      <span class="file-date">{{ getFormattedDate() }}</span>
+    </div>
+    
+    <div class="card-actions">
+      <button 
+        class="action-btn"
+        (click)="showInFolder(); $event.stopPropagation()"
+        title="Show in folder">
+        <span class="material-icons">folder_open</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="app-container">
+  <app-header 
+    [selectedFolder]="selectedFolder"
+    [currentPath]="currentPath"
+    [videoCount]="videoCount"
+    [folderCount]="folderCount"
+    [breadcrumbs]="breadcrumbs"
+    (folderSelected)="selectFolder()"
+    (refreshClicked)="refreshFiles()"
+    (breadcrumbClicked)="navigateToBreadcrumb($event)">
+  </app-header>
+
+  <main class="main-content">
+    <div class="container">
+      <!-- Empty State -->
+      <div *ngIf="videoFiles.length === 0 && !isLoading" class="empty-state">
+        <div class="empty-state-content">
+          <span class="material-icons empty-icon">video_library</span>
+          <h2>Welcome to MediaTracker</h2>
+          <p>Select a drive to start browsing your video collection</p>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="loading-state">
+        <div class="loading-spinner"></div>
+        <p>Loading videos...</p>
+      </div>
+
+      <!-- Video List -->
+      <app-video-list 
+        *ngIf="videoFiles.length > 0 && !isLoading"
+        [videoFiles]="videoFiles"
+        (folderSelected)="navigateToFolder($event)"
+        (videoPlayed)="onVideoPlayed($event)">
+      </app-video-list>
+    </div>
+  </main>
+</div>

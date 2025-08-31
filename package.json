@@ -1,0 +1,84 @@
+{
+  "name": "media-tracker",
+  "version": "1.0.0",
+  "description": "Desktop app for tracking and playing video files with VLC",
+  "main": "main.js",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "electron": "electron .",
+    "electron-dev": "concurrently \"ng serve\" \"wait-on http://localhost:4200 && electron .\"",
+    "electron-build": "ng build --base-href ./ && electron .",
+    "build-electron": "ng build --base-href ./ && electron-builder",
+    "dist": "ng build --base-href ./ && electron-builder --publish=never"
+  },
+  "keywords": [
+    "electron",
+    "angular",
+    "video",
+    "media",
+    "vlc"
+  ],
+  "author": "MediaTracker",
+  "license": "MIT",
+  "dependencies": {
+    "@angular/animations": "^17.0.0",
+    "@angular/common": "^17.0.0",
+    "@angular/compiler": "^17.0.0",
+    "@angular/core": "^17.0.0",
+    "@angular/forms": "^17.0.0",
+    "@angular/platform-browser": "^17.0.0",
+    "@angular/platform-browser-dynamic": "^17.0.0",
+    "@angular/router": "^17.0.0",
+    "@types/sqlite3": "^3.1.11",
+    "better-sqlite3": "^12.2.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^17.0.0",
+    "@angular/cli": "^17.0.0",
+    "@angular/compiler-cli": "^17.0.0",
+    "@types/node": "^18.18.0",
+    "concurrently": "^8.2.0",
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.0",
+    "typescript": "~5.2.0",
+    "wait-on": "^7.0.1"
+  },
+  "build": {
+    "appId": "com.mediatracker.app",
+    "productName": "MediaTracker",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "main.js",
+      "package.json",
+      "node_modules/better-sqlite3/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "node_modules/better-sqlite3",
+        "to": "node_modules/better-sqlite3",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "target": {
+        "target": "zip",
+        "arch": [
+          "x64"
+        ]
+      },
+      "artifactName": "MediaTracker-${version}-win-x64.zip"
+    },
+    "forceCodeSigning": false,
+    "nodeGypRebuild": false
+  }
+}

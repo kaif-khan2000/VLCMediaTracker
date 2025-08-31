@@ -1,0 +1,41 @@
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <div class="header-left">
+        <h1 class="app-title">
+          <span class="material-icons">video_library</span>
+          MediaTracker
+        </h1>
+        <div *ngIf="currentPath || breadcrumbs.length > 0" class="folder-info">
+          <div class="folder-path">
+            <span class="material-icons">{{ currentPath ? 'folder' : 'storage' }}</span>
+            <div class="breadcrumbs">
+              <span 
+                *ngFor="let crumb of breadcrumbs; let i = index" 
+                class="breadcrumb-item"
+                [title]="crumb"
+                (click)="onBreadcrumbClick(i)">
+                {{ crumb }}
+                <span *ngIf="i < breadcrumbs.length - 1" class="breadcrumb-separator">/</span>
+              </span>
+            </div>
+          </div>
+          <div class="folder-stats">
+            <span class="video-count">{{ videoCount }} videos</span>
+            <span *ngIf="folderCount > 0" class="folder-count">{{ folderCount }} folders</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button 
+          *ngIf="currentPath" 
+          class="btn btn-icon"
+          (click)="onRefresh()"
+          title="Refresh">
+          <span class="material-icons">refresh</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

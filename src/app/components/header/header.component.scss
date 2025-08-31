@@ -1,0 +1,159 @@
+.header {
+  background: rgba(26, 32, 44, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(74, 85, 104, 0.3);
+  padding: 4px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.app-title {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font: 700 14px/1 inherit;
+  color: #e2e8f0;
+  margin: 0;
+
+  .material-icons {
+    font-size: 16px;
+    color: #667eea;
+  }
+}
+
+.folder-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11px;
+  color: #cbd5e0;
+}
+
+.folder-path {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  overflow: hidden;
+  
+  .material-icons {
+    font-size: 11px;
+    color: #a0aec0;
+  }
+
+  .folder-name {
+    font-weight: 500;
+    color: #e2e8f0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80px;
+  }
+
+  .clickable-breadcrumb {
+    color: #667eea;
+    cursor: pointer;
+    padding: 1px 2px;
+    border-radius: 2px;
+
+    &:hover {
+      background-color: rgba(102, 126, 234, 0.2);
+    }
+  }
+
+  .breadcrumb-separator {
+    color: #a0aec0;
+    font-size: 10px;
+  }
+
+  .breadcrumbs {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .breadcrumb-item {
+    color: #667eea;
+    cursor: pointer;
+    padding: 1px;
+    border-radius: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 40px;
+    font-size: 9px;
+
+    &:hover {
+      background-color: rgba(102, 126, 234, 0.1);
+    }
+  }
+}
+
+.folder-stats {
+  display: flex;
+  gap: 3px;
+  font-size: 9px;
+
+  .video-count, .folder-count {
+    font-weight: 500;
+  }
+
+  .video-count {
+    color: #667eea;
+  }
+
+  .folder-count {
+    color: #10b981;
+  }
+}
+
+.header-actions {
+  display: flex;
+  gap: 3px;
+
+  .btn-icon {
+    padding: 2px;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #4a5568;
+    background: #2d3748;
+    color: #cbd5e0;
+
+    &:hover {
+      background: #4a5568;
+      color: #e2e8f0;
+    }
+
+    .material-icons {
+      font-size: 11px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .app-title {
+    font-size: 12px;
+  }
+}

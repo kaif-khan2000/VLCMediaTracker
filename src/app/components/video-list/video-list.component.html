@@ -1,0 +1,73 @@
+<div class="video-list-container">
+  <!-- Search and Controls -->
+  <div class="controls-section">
+    <div class="search-box">
+      <span class="material-icons search-icon">search</span>
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm"
+        placeholder="Search videos..."
+        class="search-input">
+    </div>
+
+    <div class="sort-controls">
+      <span class="sort-label">Sort by:</span>
+      <button 
+        class="sort-btn"
+        [class.active]="sortBy === 'name'"
+        (click)="onSortChange('name')">
+        Name
+        <span class="material-icons sort-icon">{{ getSortIcon('name') }}</span>
+      </button>
+      <button 
+        class="sort-btn"
+        [class.active]="sortBy === 'size'"
+        (click)="onSortChange('size')">
+        Size
+        <span class="material-icons sort-icon">{{ getSortIcon('size') }}</span>
+      </button>
+      <button 
+        class="sort-btn"
+        [class.active]="sortBy === 'modified'"
+        (click)="onSortChange('modified')">
+        Modified
+        <span class="material-icons sort-icon">{{ getSortIcon('modified') }}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Content Grid -->
+  <div *ngIf="filteredAndSortedVideos.length > 0">
+    <!-- Folders Section -->
+    <div class="folders-grid" *ngIf="getFolders().length > 0">
+      <app-folder-card 
+        *ngFor="let folder of getFolders(); trackBy: trackByPath"
+        [folder]="folder"
+        (folderSelected)="onFolderClick($event)">
+      </app-folder-card>
+    </div>
+    
+    <!-- Videos Section -->
+    <div class="videos-grid" *ngIf="getVideos().length > 0">
+      <app-video-card 
+        *ngFor="let video of getVideos(); trackBy: trackByPath"
+        [videoFile]="video"
+        (videoPlayed)="onVideoPlayed($event)">
+      </app-video-card>
+    </div>
+  </div>
+
+  <!-- No Results -->
+  <div class="no-results" *ngIf="filteredAndSortedVideos.length === 0 && videoFiles.length > 0">
+    <span class="material-icons">search_off</span>
+    <h3>No videos found</h3>
+    <p>Try adjusting your search terms</p>
+  </div>
+
+  <!-- No Videos -->
+  <div class="no-videos" *ngIf="videoFiles.length === 0">
+    <span class="material-icons">videocam_off</span>
+    <h3>No videos in this folder</h3>
+    <p>This folder doesn't contain any supported video files</p>
+  </div>
+</div>

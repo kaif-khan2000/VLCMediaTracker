@@ -1,0 +1,22 @@
+<div class="folder-card" (click)="openFolder()">
+  <div class="card-thumbnail">
+    <span class="material-icons folder-icon">{{ getIcon() }}</span>
+  </div>
+
+  <div class="card-content">
+    <h3 class="folder-name" [title]="folder.name">{{ folder.name }}</h3>
+    <div class="folder-meta">
+      <span class="folder-type">{{ getType() }}</span>
+      <span class="folder-date" *ngIf="folder.type !== 'drive'">{{ getFormattedDate() }}</span>
+    </div>
+  </div>
+
+  <div class="card-actions">
+    <button 
+      class="action-btn"
+      (click)="showInFolder(); $event.stopPropagation()"
+      title="Show in file explorer">
+      <span class="material-icons">folder_open</span>
+    </button>
+  </div>
+</div>
